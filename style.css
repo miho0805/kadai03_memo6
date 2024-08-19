@@ -1,0 +1,37 @@
+/* 背景 */
+body {
+    margin: 0px;
+    background-color: hotpink;
+    text-align: center;
+}
+
+/* トップ画像 */
+img {}
+
+
+/* 付箋 */
+div {
+    height: 200px;
+    box-sizing: border-box;
+    padding: 10px;
+
+}
+
+/* ボタン */
+button {
+    /* 色 */
+    background-color: rgb(248, 167, 214);
+    /* 横 */
+    width: 30%;
+    /* 縦 */
+    height: 50px;
+    /* 丸 */
+    border-radius: 30px;
+    
+}
+
+
+
+
+
+

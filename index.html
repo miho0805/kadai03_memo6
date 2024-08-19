@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<!-- 保存先の確認方法👉Application👉Local storage👉http://127.0.0.1:5500-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css" />
+    <title>スーザン先生の自主練室</title>
+
+    <style>
+        #main {
+            color: rgb(11, 112, 200);
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        div {
+            background-color: aquamarine;
+            margin: 5px;
+            width: 190px;
+        }
+
+        .new {
+            border: 5px solid rgb(226, 253, 69);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- トップ画像 -->
+    <img src="suzan.jpg" width="100%" alt="スーザン先生の自主練室"><br>
+
+
+    <!-- 文字 -->
+    <h2 width="100%">
+        🌻注意するポイントをメモして🌻<br>
+        🌼確認しながら練習しよう🌼
+    </h2>
+
+    <h5 width="100%">
+        ～メモは上書き保存が可能だよ～
+    </h5>
+
+
+    <!-- ボタン -->
+    <button id="add" class="btn"> メモする </button>
+    <button id="save" class="btn">保存する</button>
+    <button id="clear" class="btn">消す</button>
+
+    <main id="main">
+
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        let c = 0;
+        $("#add").on("click", function () {
+            $("#main>div").removeClass("new");
+            c++;
+            const html = ` 
+           <div class="new">${c}<textarea id="add_${c}" class="memo" cols="18" rows="11"></textarea></div>
+           `;
+            $("#main").append(html);
+        });
+
+        $("#save").on("click", function () {
+            const len = $(".memo").length;
+            let ary = [];
+            for (let i = 0; i < len; i++) {
+                ary[i] = $("#add_" + (i + 1)).val();
+            }
+
+            localStorage.setItem("card", JSON.stringify(ary));
+
+        })
+
+
+        $("#clear").on("click", function () {
+            localStorage.clear();
+            $("#main").empty();
+            c = 0;
+        });
+
+
+
+
+        Window.onload = function () {
+            const ary = JSON.parse(localStorage.getItem("card"));
+            for (let i = 0; i < ary.length; i++) {
+                const html = ` 
+           <div>${i + 1}<textarea cols="18" rows="11"id="add_${i + 1}" class="memo${ary[i]}textarea ></div>
+           `;
+                $("#main").append(html);
+                c = i + 1;
+            }
+        }
+
+    </script>
+
+
+</body>
+
+</html>
